@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+tools:context="lucas.curso.jogoforca.MainActivity">
+
+    <item
+        android:id="@+id/iniciar"
+        android:orderInCategory="100"
+        android:title="iniciar"
+        />
+
+    <item
+        android:id="@+id/recomecar"
+        android:orderInCategory="100"
+        android:title="reiniciar"
+        />
+
+    <item
+        android:id="@+id/fechar"
+        android:orderInCategory="100"
+        android:title="fechar"
+        />
+</menu>

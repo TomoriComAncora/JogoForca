@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_column="3"
+    tools:context=".MainActivity">
+
+    <TableLayout
+        android:id="@+id/tableLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/letraq"
+                android:layout_width="40dp"
+                android:layout_height="60dp"
+                android:backgroundTint="@android:color/transparent"
+                android:contentDescription="q"
+                android:scaleType="centerCrop"
+                android:tag="q"
+                app:srcCompat="@drawable/letraq" />
+
+            <ImageButton
+                android:id="@+id/letraw"
+                android:layout_width="40dp"
+                android:layout_height="60dp"
+                android:backgroundTint="@android:color/transparent"
+                android:scaleType="centerCrop"
+                android:tag="w"
+                app:srcCompat="@drawable/letraw" />
+
+            <ImageButton
+                android:id="@+id/letrae"
+                android:layout_width="40dp"
+                android:layout_height="60dp"
+                android:backgroundTint="@android:color/transparent"
+                android:scaleType="centerCrop"
+                android:tag="e"
+                app:srcCompat="@drawable/letrae" />
+
+            <ImageButton
+                android:id="@+id/letrar"
+                android:layout_width="40dp"
+                android:layout_height="60dp"
+                android:backgroundTint="@android:color/transparent"
+                android:scaleType="centerCrop"
+                android:tag="r"
+                app:srcCompat="@drawable/letrar" />
+
+            <ImageButton
+                android:id="@+id/letrat"
+                android:layout_width="40dp"
+                android:layout_height="60dp"
+                android:backgroundTint="@android:color/transparent"
+                android:scaleType="centerCrop"
+                android:tag="t"
+                app:srcCompat="@drawable/letrat" />
+
+            <ImageButton
+                android:id="@+id/letray"
+                android:layout_width="40dp"
+                android:layout_height="60dp"
+                android:backgroundTint="@android:color/transparent"
+                android:scaleType="centerCrop"
+                android:tag="y"
+                app:srcCompat="@drawable/letray" />
+
+            <ImageButton
+                android:id="@+id/letrau"
+                android:layout_width="40dp"
+                android:layout_height="60dp"
+                android:backgroundTint="@android:color/transparent"
+                android:scaleType="centerCrop"
+                android:tag="u"
+                app:srcCompat="@drawable/letrau" />
+
+            <ImageButton
+                android:id="@+id/letrai"
+                android:layout_width="40dp"
+                android:layout_height="60dp"
+                android:backgroundTint="@android:color/transparent"
+                android:scaleType="centerCrop"
+                android:tag="i"
+                app:srcCompat="@drawable/letrai" />
+
+            <ImageButton
+                android:id="@+id/letrao"
+                android:layout_width="40dp"
+                android:layout_height="60dp"
+                android:backgroundTint="@android:color/transparent"
+                android:scaleType="centerCrop"
+                android:tag="o"
+                app:srcCompat="@drawable/letrao" />
+
+            <ImageButton
+                android:id="@+id/letrap"
+                android:layout_width="40dp"
+                android:layout_height="60dp"
+                android:backgroundTint="@android:color/transparent"
+                android:scaleType="centerCrop"
+                android:tag="p"
+                app:srcCompat="@drawable/letrap" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/letraa"
+                android:layout_width="40dp"
+                android:layout_height="60dp"
+                android:backgroundTint="@android:color/transparent"
+                android:scaleType="centerCrop"
+                android:tag="a"
+                app:srcCompat="@drawable/letraa" />
+
+            <ImageButton
+                android:id="@+id/letras"
+                android:layout_width="40dp"
+                android:layout_height="60dp"
+                android:backgroundTint="@android:color/transparent"
+                android:scaleType="centerCrop"
+                android:tag="s"
+                app:srcCompat="@drawable/letras" />
+
+            <ImageButton
+                android:id="@+id/letrad"
+                android:layout_width="40dp"
+                android:layout_height="60dp"
+                android:backgroundTint="@android:color/transparent"
+                android:scaleType="centerCrop"
+                android:tag="d"
+                app:srcCompat="@drawable/letrad" />
+
+            <ImageButton
+                android:id="@+id/letraf"
+                android:layout_width="40dp"
+                android:layout_height="60dp"
+                android:backgroundTint="@android:color/transparent"
+                android:scaleType="centerCrop"
+                android:tag="f"
+                app:srcCompat="@drawable/letraf" />
+
+            <ImageButton
+                android:id="@+id/letrag"
+                android:layout_width="40dp"
+                android:layout_height="60dp"
+                android:backgroundTint="@android:color/transparent"
+                android:scaleType="centerCrop"
+                android:tag="g"
+                app:srcCompat="@drawable/letrag" />
+
+            <ImageButton
+                android:id="@+id/letrah"
+                android:layout_width="40dp"
+                android:layout_height="60dp"
+                android:backgroundTint="@android:color/transparent"
+                android:scaleType="centerCrop"
+                android:tag="h"
+                app:srcCompat="@drawable/letrah" />
+
+            <ImageButton
+                android:id="@+id/letraj"
+                android:layout_width="40dp"
+                android:layout_height="60dp"
+                android:backgroundTint="@android:color/transparent"
+                android:scaleType="centerCrop"
+                android:tag="j"
+                app:srcCompat="@drawable/letraj" />
+
+            <ImageButton
+                android:id="@+id/letrak"
+                android:layout_width="40dp"
+                android:layout_height="60dp"
+                android:backgroundTint="@android:color/transparent"
+                android:scaleType="centerCrop"
+                android:tag="k"
+                app:srcCompat="@drawable/letrak" />
+
+            <ImageButton
+                android:id="@+id/letral"
+                android:layout_width="40dp"
+                android:layout_height="60dp"
+                android:backgroundTint="@android:color/transparent"
+                android:scaleType="centerCrop"
+                android:tag="l"
+                app:srcCompat="@drawable/letral" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/letraz"
+                android:layout_width="40dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:backgroundTint="@android:color/transparent"
+                android:scaleType="centerCrop"
+                android:tag="z"
+                app:srcCompat="@drawable/letraz" />
+
+            <ImageButton
+                android:id="@+id/letrax"
+                android:layout_width="40dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:backgroundTint="@android:color/transparent"
+                android:scaleType="centerCrop"
+                android:tag="x"
+                app:srcCompat="@drawable/letrax" />
+
+            <ImageButton
+                android:id="@+id/letrac"
+                android:layout_width="40dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:backgroundTint="@android:color/transparent"
+                android:scaleType="centerCrop"
+                android:tag="c"
+                app:srcCompat="@drawable/letrac" />
+
+            <ImageButton
+                android:id="@+id/letrav"
+                android:layout_width="40dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:backgroundTint="@android:color/transparent"
+                android:scaleType="centerCrop"
+                android:tag="v"
+                app:srcCompat="@drawable/letrav" />
+
+            <ImageButton
+                android:id="@+id/letrab"
+                android:layout_width="40dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:backgroundTint="@android:color/transparent"
+                android:scaleType="centerCrop"
+                android:tag="b"
+                app:srcCompat="@drawable/letrab" />
+
+            <ImageButton
+                android:id="@+id/letran"
+                android:layout_width="40dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:backgroundTint="@android:color/transparent"
+                android:scaleType="centerCrop"
+                android:tag="n"
+                app:srcCompat="@drawable/letran" />
+
+            <ImageButton
+                android:id="@+id/letram"
+                android:layout_width="40dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:backgroundTint="@android:color/transparent"
+                android:scaleType="centerCrop"
+                android:tag="m"
+                app:srcCompat="@drawable/letram" />
+
+            <ImageButton
+                android:id="@+id/checkBT"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@android:color/transparent"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/confirmar" />
+        </TableRow>
+
+    </TableLayout>
+
+    <ImageView
+        android:id="@+id/imgForca"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="108dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/forca_6" />
+
+    <TextView
+        android:id="@+id/textResult"
+        android:layout_width="200dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/canto_arredondado"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgForca" />
+
+    <TextView
+        android:id="@+id/editLetra"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="24dp"
+        android:hint="digite a letra:"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textResult" />
+
+    <TextView
+        android:id="@+id/letrasTentadas"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="215dp"
+        android:background="@drawable/canto_arredondado"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textCronometro" />
+
+    <TextView
+        android:id="@+id/textCronometro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="27dp"
+        android:layout_marginBottom="417dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/letrasTentadas"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
