@@ -28,8 +28,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Thread cronometroThread;
     private boolean cronometrorodando;
     private long duracaoCronometro, duracaoInicial;
-    private TextView textCronometro;
-    private ImageView imagemForca;
+    private TextView textCronometro, textnome;
+    private ImageView imagemForca, imageAvatar;
     private int tentativasRestantes;
     private ImageButton ltA, ltB, ltC, ltD, ltE, ltF, ltG, ltH, ltI, ltJ, ltK, ltL, ltM, ltN, ltO,
             ltP, ltQ, ltR, ltS, ltT, ltU, ltV, ltW, ltX, ltY, ltZ, confirmar;
@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView textResult, textTentativas;
 
     private StringBuilder letrasTentadas;
+    final static int TEMPO = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         inicializando();
         verificarLetras();
+        recuperarAvatar();
 
     }
 
@@ -150,6 +152,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editLetra = findViewById(R.id.editLetra);
         textResult = findViewById(R.id.textResult);
         textTentativas = findViewById(R.id.letrasTentadas);
+        imageAvatar = findViewById(R.id.imageAvatar);
+        textnome = findViewById(R.id.textNome);
 
         letrasTentadas = new StringBuilder();
         clickLetras();
@@ -166,7 +170,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         });
-        duracaoInicial = 15;
+        duracaoInicial = TEMPO;
         duracaoCronometro = duracaoInicial;
         inicalizarJogo();
         iniciarCronometro();
@@ -186,7 +190,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                textCronometro.setText("Tempo restante:" + duracaoCronometro + "S");
+                                textCronometro.setText(duracaoCronometro + "S");
 
                                 if (duracaoCronometro <= 0) {
                                     AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
@@ -343,5 +347,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onDestroy() {
         super.onDestroy();
         finish();
+    }
+
+    private void recuperarAvatar(){
+        String nome = getIntent().getStringExtra("texto");
+        textnome.setText(nome);
+
+        int imagem = getIntent().getIntExtra("imagem", 0);
+        imageAvatar.setImageResource(imagem);
     }
 }
