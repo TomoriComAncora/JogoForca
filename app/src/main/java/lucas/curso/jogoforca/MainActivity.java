@@ -21,7 +21,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import lucas.curso.jogoforca.banco.BancoDeDados;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    private static BancoDeDados bancoDeDados;
     private List<String> palavras;
     private String palavraSecreta;
     private StringBuilder palavraAdivinhada;
@@ -45,17 +48,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        palavras = new ArrayList<>();
-        palavras.add("android");
-        palavras.add("java");
-        palavras.add("kotlin");
-
+        bancoDeDados = new BancoDeDados(this);
 
         inicializando();
         verificarLetras();
         recuperarAvatar();
+        carregarPalavras();
+    }
 
+    public void carregarPalavras() {
+        palavras = bancoDeDados.listPalavras();
     }
 
     public void verificarLetras(){
@@ -355,5 +357,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         int imagem = getIntent().getIntExtra("imagem", 0);
         imageAvatar.setImageResource(imagem);
+    }
+
+    public static BancoDeDados getBancoDeDados() {
+        return bancoDeDados;
     }
 }
