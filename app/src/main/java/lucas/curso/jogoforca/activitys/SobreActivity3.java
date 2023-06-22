@@ -21,6 +21,7 @@ public class SobreActivity3 extends AppCompatActivity {
 
         carregarPalavras();
 
+        //mostra as palavras salvas no BD
         this.palavrasBD = LoginActivity2.getBancoDeDados().listPalavras();
         palavras.setText(palavrasBD.toString());
 
@@ -29,4 +30,5 @@ public class SobreActivity3 extends AppCompatActivity {
     public void carregarPalavras() {
         palavrasBD = LoginActivity2.getBancoDeDados().listPalavras();
     }
+
 }

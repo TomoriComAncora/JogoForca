@@ -32,6 +32,8 @@ public class LoginActivity2 extends AppCompatActivity {
         btstop = findViewById(R.id.bt_stop);
         btplay = findViewById(R.id.bt_playmuica);
         bancoDeDados = new BancoDeDados(this);
+
+        //vai para a tela de colocar o nick e a foto do avatr
         bt1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -41,6 +43,7 @@ public class LoginActivity2 extends AppCompatActivity {
             }
         });
 
+        //vai pra tela que mostra as palavras do BD
         bt2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -50,6 +53,7 @@ public class LoginActivity2 extends AppCompatActivity {
             }
         });
 
+        //vai pra tela de adicionar palavra
         bt3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,6 +63,7 @@ public class LoginActivity2 extends AppCompatActivity {
             }
         });
 
+        //para a musica
         btstop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,6 +72,7 @@ public class LoginActivity2 extends AppCompatActivity {
             }
         });
 
+        //recomeça a musica
         btplay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,7 +81,7 @@ public class LoginActivity2 extends AppCompatActivity {
             }
         });
     }
-
+    //chama o BD
     public static BancoDeDados getBancoDeDados() {
         return bancoDeDados;
     }

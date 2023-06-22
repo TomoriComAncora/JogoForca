@@ -26,11 +26,13 @@ public class BancoDeDados extends SQLiteOpenHelper {
 
     }
 
+    //inserir palavra no BD
     public void inserirPalavra(String palavra) {
         String query = "INSERT INTO palavras (palavra) VALUES ('" + palavra + "');";
         getWritableDatabase().execSQL(query);
     }
 
+    //Listagem de palavras no BD
     public List<String> listPalavras() {
         String query = "SELECT * FROM palavras;";
         List<String> palavras = new ArrayList<>();
@@ -44,5 +46,5 @@ public class BancoDeDados extends SQLiteOpenHelper {
 
         return palavras;
     }
-//versao6
+
 }

@@ -75,10 +75,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         nmc.createNotificationChannel(nc);
     }
 
+    //carrega as palavras do BD
     public void carregarPalavras() {
         palavras = LoginActivity2.getBancoDeDados().listPalavras();
     }
 
+    //Faz verificação se a letra é válida
     public void verificarLetras() {
         editLetra.addTextChangedListener(new TextWatcher() {
             @Override
@@ -89,7 +91,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (charSequence.length() > 0 && !letra(charSequence.charAt(0))) {
-                    // Remover o texto não válido
                     editLetra.setText("");
                     Toast.makeText(MainActivity.this, "Digite apenas uma letra válida", Toast.LENGTH_SHORT).show();
                 }
@@ -103,6 +104,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
+    //criação do menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -110,6 +112,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return true;
     }
 
+
+    //configuração do menu
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.iniciar:
@@ -125,20 +129,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return super.onOptionsItemSelected(item);
     }
 
+    //confirmar se é letra
     private boolean letra(char c) {
         return Character.isLetter(c);
     }
 
+    //pegar letra e tranformar em minuscula
     @Override
     public void onClick(View view) {
 
         ImageButton button = (ImageButton) view;
         String letra = button.getTag().toString().toLowerCase();
 
-        // Definir a letra capturada no EditText
         editLetra.setText(letra);
     }
 
+    //inicializar os componentes
     public void inicializando() {
         ltA = findViewById(R.id.letraa);
         ltB = findViewById(R.id.letrab);
@@ -179,6 +185,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         letrasTentadas = new StringBuilder();
         clickLetras();
 
+        //confirmar que só colocou uma letra
         confirmar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -198,6 +205,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         iniciarCronometro();
     }
 
+    //inicia o cronometro
     private void iniciarCronometro() {
         cronometrorodando = true;
         cronometroThread = new Thread(new Runnable() {
@@ -246,11 +254,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         cronometroThread.start();
     }
 
+    //parar o cronometro
     private void pararCronometro() {
         cronometrorodando = false;
         cronometroThread.interrupt();
     }
 
+    //evento de clique nas letras
     public void clickLetras() {
         ltA.setOnClickListener(this);
         ltB.setOnClickListener(this);
@@ -280,6 +290,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ltZ.setOnClickListener(this);
     }
 
+    //inicializa o jogo e vê se o BD tem palavras
     private void inicalizarJogo() {
         Random random = new Random();
         this.palavras = LoginActivity2.getBancoDeDados().listPalavras();
@@ -302,6 +313,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         atualizarTela();
     }
 
+    //verifica se a letra existe na palavra
     private void verificarLetra(char letra) {
         boolean encontrou = false;
         boolean letraDigitada = letrasTentadas.toString().contains(String.valueOf(letra));
@@ -334,6 +346,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    //atualiza a tela, e as imagens, tambem da a noticia se perdeo ou ganhou
     private void atualizarTela() {
         String palavraExibida = palavraAdivinhada.toString();
         textResult.setText(palavraExibida);
@@ -365,12 +378,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             AlertDialog dialog = builder.create();
             dialog.show();
 
+            //troca a imagem da forca
         } else {
             int imagemForcaResouce = getResources().getIdentifier("forca_" + tentativasRestantes, "drawable", getOpPackageName());
             imagemForca.setImageResource(imagemForcaResouce);
         }
     }
 
+    //para reiniciar o jogo e reiniciar o cronometro
     private void reiniciarJogo() {
         letrasTentadas.setLength(0);
         textTentativas.setText("");
@@ -380,6 +395,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         iniciarCronometro();
     }
 
+    //para inicar o jogo dentro/ pelo menu
     private void iniciar() {
         letrasTentadas.setLength(0);
         textResult.setText("");
@@ -394,6 +410,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         finish();
     }
 
+    //pegar as informações da activity anterior
     private void recuperarAvatar() {
         String nome = getIntent().getStringExtra("texto");
         textnome.setText(nome);
@@ -402,6 +419,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         imageAvatar.setImageResource(imagem);
     }
 
+    //manda a notificação
     public void exibirNotificacao() {
         NotificationCompat.Builder noti = new NotificationCompat.Builder(getApplicationContext(),
                 "Errou");
@@ -417,6 +435,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         nmc.notify(1, noti.build());
     }
 
+    //verifica o sensor
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
         ConstraintLayout layout = findViewById(R.id.telaPrincipal);
@@ -440,11 +459,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    //cria o sensor
     public void criacaoSM(){
         sensorLuz = sm.getDefaultSensor(Sensor.TYPE_LIGHT);
         sensorTemp = sm.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE);
     }
 
+    //verifica se ele tá bom
     public void verificarSensores(){
         if(sensorLuz != null){
             sm.registerListener(this, sensorLuz, SensorManager.SENSOR_DELAY_NORMAL);
@@ -457,5 +478,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }else {
             Toast.makeText(this, "Sensor não está funcionando", Toast.LENGTH_SHORT).show();
         }
+
     }
 }

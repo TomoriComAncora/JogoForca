@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">JogoForca</string>
+    <string name="jogar">JOGAR</string>
+    <string name="addPala">ADD PALAVRA</string>
+    <string name="palavrasSalvas">PALAVRAS SALVAS</string>
+    <string name="escolhaAvatar">Escolha seu avatar</string>
+    <string name="seuNome">Digite seu nome:</string>
+    <string name="btPlay">PLAY</string>
+    <string name="addPalavraTxt">Add. Palavra</string>
+    <string name="btAddPalavra">ADICIONAR</string>
+    <string name="nick">NICK</string>
+    <string name="tentativa">Digite uma letra:</string>
+    <string name="tempo">Tempo Restante:</string>
+    <string name="palavrasAdd">Palavras adicionadas</string>
 </resources>

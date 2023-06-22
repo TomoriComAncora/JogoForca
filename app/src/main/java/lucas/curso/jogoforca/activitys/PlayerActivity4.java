@@ -36,6 +36,7 @@ public class PlayerActivity4 extends AppCompatActivity {
         editText = findViewById(R.id.editNome);
         btEnviar = findViewById(R.id.btPlay);
 
+        //botão para escolha do avatar
         py1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -44,6 +45,7 @@ public class PlayerActivity4 extends AppCompatActivity {
             }
         });
 
+        //botão para escolha do avatar
         py2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,6 +54,7 @@ public class PlayerActivity4 extends AppCompatActivity {
             }
         });
 
+        //botão para escolha do avatar
         py3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,6 +63,7 @@ public class PlayerActivity4 extends AppCompatActivity {
             }
         });
 
+        //botão para escolha do avatar
         py4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,6 +72,7 @@ public class PlayerActivity4 extends AppCompatActivity {
             }
         });
 
+        //botão para enviar o nick e a foto para a tela de jogo
         btEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,4 +89,5 @@ public class PlayerActivity4 extends AppCompatActivity {
             }
         });
     }
+    //versao6
 }

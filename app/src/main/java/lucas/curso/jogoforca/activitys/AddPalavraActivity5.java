@@ -23,6 +23,7 @@ public class AddPalavraActivity5 extends AppCompatActivity {
         editTextPalavra = findViewById(R.id.editTextText);
         buttonSalvar = findViewById(R.id.bt_adicionar);
 
+        //botão para adicionar palavra no BD
         buttonSalvar.setOnClickListener(v -> {
             String palavra = editTextPalavra.getText().toString();
             if (palavra.isEmpty()) {
