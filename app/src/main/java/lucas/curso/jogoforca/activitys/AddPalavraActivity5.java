@@ -28,11 +28,12 @@ public class AddPalavraActivity5 extends AppCompatActivity {
             String palavra = editTextPalavra.getText().toString();
             if (palavra.isEmpty()) {
                 Toast.makeText(this, "Digite uma palavra", Toast.LENGTH_SHORT).show();
-            } else {
+            } else if(LoginActivity2.getBancoDeDados().inserirPalavra(palavra)) {
                 Toast.makeText(this, "Palavra salva", Toast.LENGTH_SHORT).show();
-                LoginActivity2.getBancoDeDados().inserirPalavra(palavra);
-                finish();
+            }else {
+                Toast.makeText(this, "Essa palavra já existe", Toast.LENGTH_SHORT).show();
             }
+            finish();
         });
     }
 }
