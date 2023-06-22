@@ -46,16 +46,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
 
-        palavras = new ArrayList<>();
-        palavras.add("android");
-        palavras.add("java");
-        palavras.add("kotlin");
-
 
         inicializando();
         verificarLetras();
         recuperarAvatar();
+        carregarPalavra();
 
+    }
+    public void carregarPalavra(){
+        palavras = LoginActivity2.getBancoDeDados().listPalavras();
     }
 
     public void verificarLetras(){
