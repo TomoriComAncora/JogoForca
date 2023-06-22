@@ -287,7 +287,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             palavraAdivinhada.append("_");
         }
         atualizarTela();
-        mp.start();
+        mp.start();// som
     }
 
     private void verificarLetra(char letra) {
