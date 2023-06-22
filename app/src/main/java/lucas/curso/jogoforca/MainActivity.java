@@ -3,11 +3,20 @@ package lucas.curso.jogoforca;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
+import android.app.NotificationManager;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
+import android.media.AudioManager;
+import android.media.MediaParser;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +31,7 @@ import java.util.List;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
     private List<String> palavras;
     private String palavraSecreta;
     private StringBuilder palavraAdivinhada;
@@ -39,25 +49,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private StringBuilder letrasTentadas;
     final static int TEMPO = 1000;
+    private AudioManager audioManager;
+    private MediaPlayer mp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
+        mp = MediaPlayer.create(this, R.raw.bluebird);
         inicializando();
         verificarLetras();
         recuperarAvatar();
-        carregarPalavra();
-
+        carregarPalavras();
     }
-    public void carregarPalavra(){
+
+    public void carregarPalavras() {
         palavras = LoginActivity2.getBancoDeDados().listPalavras();
     }
 
-    public void verificarLetras(){
+    public void verificarLetras() {
         editLetra.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -91,10 +102,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.iniciar:
-                inicalizarJogo();
+                reiniciarJogo();
                 break;
             case R.id.recomecar:
-                reiniciarJogo();
+                iniciar();
                 break;
             case R.id.fechar:
                 onDestroy();
@@ -258,8 +269,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void inicalizarJogo() {
         Random random = new Random();
+        this.palavras = LoginActivity2.getBancoDeDados().listPalavras();
+
+        if (palavras.size() == 0) {
+            Toast.makeText(MainActivity.this, "Não há palavras cadastradas", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        Log.d("palavras", palavras.toString());
         int index = random.nextInt(palavras.size());
         palavraSecreta = palavras.get(index);
+        Log.d("palavraSecreta", palavraSecreta);
         palavraAdivinhada = new StringBuilder();
         tentativasRestantes = 6;
 
@@ -267,13 +287,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             palavraAdivinhada.append("_");
         }
         atualizarTela();
+        mp.start();
     }
 
     private void verificarLetra(char letra) {
         boolean encontrou = false;
         boolean letraDigitada = letrasTentadas.toString().contains(String.valueOf(letra));
 
-        if(letraDigitada){
+        if (letraDigitada) {
             Toast.makeText(MainActivity.this, "Letra já digitada", Toast.LENGTH_LONG).show();
             tentativasRestantes--;
             atualizarTela();
@@ -291,7 +312,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             letrasTentadas.append(letra).append(" ");
             textTentativas.setText(letrasTentadas.toString());
             tentativasRestantes--;
-        }else {
+        } else {
             letrasTentadas.append(letra).append(" ");
 
         }
@@ -309,6 +330,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(this, "Parabens", Toast.LENGTH_LONG).show();
             reiniciarJogo();
         } else if (tentativasRestantes == 0) {
+        exibirNotificacao("Você Perdeu", "A palavra era: " + palavraSecreta);
             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
             builder.setTitle("Você perdeu").setIcon(R.drawable.ic_erro)
                     .setMessage("Deseja reiniciar o jogo?")
@@ -343,16 +365,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         iniciarCronometro();
     }
 
+    private void iniciar() {
+        letrasTentadas.setLength(0);
+        textResult.setText("");
+        tentativasRestantes = 6;
+        atualizarTela();
+    }
+
     protected void onDestroy() {
         super.onDestroy();
         finish();
     }
 
-    private void recuperarAvatar(){
+    private void recuperarAvatar() {
         String nome = getIntent().getStringExtra("texto");
         textnome.setText(nome);
 
         int imagem = getIntent().getIntExtra("imagem", 0);
         imageAvatar.setImageResource(imagem);
+    }
+
+    private void exibirNotificacao(String titulo, String mensagem) {
+        NotificationCompat.Builder noti;
+        noti = new NotificationCompat.Builder(this, "Notificação Derrota");
+        noti.setSmallIcon(R.drawable.ic_erro);
+        noti.setContentTitle(titulo);
+        noti.setContentText(mensagem);
+
+
     }
 }

@@ -9,8 +9,10 @@ import android.widget.Toast;
 
 public class AddPalavraActivity5 extends AppCompatActivity {
 
+
     EditText editTextPalavra;
     Button buttonSalvar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +28,7 @@ public class AddPalavraActivity5 extends AppCompatActivity {
             } else {
                 Toast.makeText(this, "Palavra salva", Toast.LENGTH_SHORT).show();
                 LoginActivity2.getBancoDeDados().inserirPalavra(palavra);
-                //finish();
+                finish();
             }
         });
     }

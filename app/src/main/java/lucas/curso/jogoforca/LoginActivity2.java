@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import lucas.curso.jogoforca.bancoDeDados.BancoDeDados;
+import lucas.curso.jogoforca.banco.BancoDeDados;
 
 public class LoginActivity2 extends AppCompatActivity {
 
@@ -22,7 +22,6 @@ public class LoginActivity2 extends AppCompatActivity {
         bt2 = findViewById(R.id.bt_sobre2);
         bt3 = findViewById(R.id.bt_addPalavra);
         bancoDeDados = new BancoDeDados(this);
-
         bt1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -47,6 +46,7 @@ public class LoginActivity2 extends AppCompatActivity {
             }
         });
     }
+
     public static BancoDeDados getBancoDeDados() {
         return bancoDeDados;
     }
