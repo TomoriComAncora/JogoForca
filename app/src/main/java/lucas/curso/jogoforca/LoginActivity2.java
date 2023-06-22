@@ -50,4 +50,5 @@ public class LoginActivity2 extends AppCompatActivity {
     public static BancoDeDados getBancoDeDados() {
         return bancoDeDados;
     }
+    //versao6
 }

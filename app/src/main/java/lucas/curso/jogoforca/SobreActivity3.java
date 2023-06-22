@@ -11,4 +11,5 @@ public class SobreActivity3 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sobre3);
     }
+    //versao 6
 }
