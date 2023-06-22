@@ -34,4 +34,5 @@ public class AddPalavraActivity5 extends AppCompatActivity {
             }
         });
     }
+    //versao6
 }

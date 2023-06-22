@@ -457,5 +457,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }else {
             Toast.makeText(this, "Sensor não está funcionando", Toast.LENGTH_SHORT).show();
         }
+
     }
 }
