@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/vale_fim"
-    tools:context=".AddPalavraActivity5">
+    tools:context=".activitys.AddPalavraActivity5">
 
     <EditText
         android:id="@+id/editTextText"

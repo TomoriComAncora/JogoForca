@@ -1,17 +1,22 @@
-package lucas.curso.jogoforca;
+package lucas.curso.jogoforca.activitys;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import android.Manifest;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
-import android.media.AudioManager;
-import android.media.MediaParser;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.Editable;
@@ -20,48 +25,54 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+import lucas.curso.jogoforca.R;
 
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, SensorEventListener {
+
+    final static int TEMPO = 180;
     private List<String> palavras;
     private String palavraSecreta;
-    private StringBuilder palavraAdivinhada;
+    private StringBuilder palavraAdivinhada, letrasTentadas;
     private Thread cronometroThread;
     private boolean cronometrorodando;
     private long duracaoCronometro, duracaoInicial;
-    private TextView textCronometro, textnome;
+    private TextView textCronometro, textnome, editLetra, textResult, textTentativas;
     private ImageView imagemForca, imageAvatar;
     private int tentativasRestantes;
     private ImageButton ltA, ltB, ltC, ltD, ltE, ltF, ltG, ltH, ltI, ltJ, ltK, ltL, ltM, ltN, ltO,
             ltP, ltQ, ltR, ltS, ltT, ltU, ltV, ltW, ltX, ltY, ltZ, confirmar;
-
-    private TextView editLetra;
-    private TextView textResult, textTentativas;
-
-    private StringBuilder letrasTentadas;
-    final static int TEMPO = 1000;
-    private AudioManager audioManager;
-    private MediaPlayer mp;
+    private SensorManager sm;
+    private Sensor sensorLuz, sensorTemp;
+    private MediaPlayer mp, mp2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mp = MediaPlayer.create(this, R.raw.bluebird);
+        mp = MediaPlayer.create(this, R.raw.click);
+        mp2 = MediaPlayer.create(this, R.raw.somdegrito);
         inicializando();
         verificarLetras();
         recuperarAvatar();
         carregarPalavras();
+
+        sm = (SensorManager) getSystemService(SENSOR_SERVICE);
+        criacaoSM();
+        verificarSensores();
+
+        NotificationChannel nc = new NotificationChannel("Errou", "Derrota",
+                NotificationManager.IMPORTANCE_DEFAULT);
+        NotificationManager nmc = getSystemService(NotificationManager.class);
+        nmc.createNotificationChannel(nc);
     }
 
     public void carregarPalavras() {
@@ -171,12 +182,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         confirmar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mp.start();
                 String letra = editLetra.getText().toString().toLowerCase();
                 if (letra.length() == 1 && letra(letra.charAt(0))) {
                     verificarLetra(letra.charAt(0));
                     editLetra.setText("");
                 } else {
-                    Toast.makeText(MainActivity.this, "digite apenas uma letra", Toast.LENGTH_LONG);
+                    Toast.makeText(MainActivity.this, "digite apenas uma letra", Toast.LENGTH_SHORT);
                 }
             }
         });
@@ -201,7 +213,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             @Override
                             public void run() {
                                 textCronometro.setText(duracaoCronometro + "S");
-
                                 if (duracaoCronometro <= 0) {
                                     AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                                     builder.setTitle("Tempo esgotado").setIcon(R.drawable.ic_erro)
@@ -209,12 +220,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                             .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialogInterface, int i) {
+                                                    mp.start();
                                                     reiniciarJogo();
                                                     dialogInterface.dismiss();
                                                 }
                                             }).setNegativeButton("Não", new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialogInterface, int i) {
+                                                    mp.start();
                                                     onDestroy();
                                                 }
                                             });
@@ -287,7 +300,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             palavraAdivinhada.append("_");
         }
         atualizarTela();
-        mp.start();// som
     }
 
     private void verificarLetra(char letra) {
@@ -295,7 +307,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         boolean letraDigitada = letrasTentadas.toString().contains(String.valueOf(letra));
 
         if (letraDigitada) {
-            Toast.makeText(MainActivity.this, "Letra já digitada", Toast.LENGTH_LONG).show();
+            Toast.makeText(MainActivity.this, "Letra já digitada", Toast.LENGTH_SHORT).show();
             tentativasRestantes--;
             atualizarTela();
             return;
@@ -308,7 +320,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         if (!encontrou) {
-            Toast.makeText(MainActivity.this, "Errou", Toast.LENGTH_LONG).show();
+            Toast.makeText(MainActivity.this, "Errou", Toast.LENGTH_SHORT).show();
             letrasTentadas.append(letra).append(" ");
             textTentativas.setText(letrasTentadas.toString());
             tentativasRestantes--;
@@ -330,21 +342,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(this, "Parabens", Toast.LENGTH_LONG).show();
             reiniciarJogo();
         } else if (tentativasRestantes == 0) {
-        exibirNotificacao("Você Perdeu", "A palavra era: " + palavraSecreta);
+            mp2.start();
+            exibirNotificacao();
             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
             builder.setTitle("Você perdeu").setIcon(R.drawable.ic_erro)
                     .setMessage("Deseja reiniciar o jogo?")
                     .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
+                            mp.start();
                             reiniciarJogo();
                             dialogInterface.dismiss();
                         }
                     }).setNegativeButton("Não", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
+                            mp.start();
                             pararCronometro();
-                            onDestroy();
+                            finish();
                         }
                     });
             AlertDialog dialog = builder.create();
@@ -374,6 +389,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     protected void onDestroy() {
         super.onDestroy();
+        sm.unregisterListener(this, sensorLuz);
+        sm.unregisterListener(this, sensorTemp);
         finish();
     }
 
@@ -385,13 +402,60 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         imageAvatar.setImageResource(imagem);
     }
 
-    private void exibirNotificacao(String titulo, String mensagem) {
-        NotificationCompat.Builder noti;
-        noti = new NotificationCompat.Builder(this, "Notificação Derrota");
+    public void exibirNotificacao() {
+        NotificationCompat.Builder noti = new NotificationCompat.Builder(getApplicationContext(),
+                "Errou");
         noti.setSmallIcon(R.drawable.ic_erro);
-        noti.setContentTitle(titulo);
-        noti.setContentText(mensagem);
+        noti.setContentTitle("Alerta de erro");
+        noti.setContentText("Infelizmente você perdeu o jogo!!");
 
+        NotificationManagerCompat nmc;
+        nmc = NotificationManagerCompat.from(getApplicationContext());
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        nmc.notify(1, noti.build());
+    }
 
+    @Override
+    public void onSensorChanged(SensorEvent sensorEvent) {
+        ConstraintLayout layout = findViewById(R.id.telaPrincipal);
+        if(sensorEvent.sensor.getType() == Sensor.TYPE_LIGHT){
+            if((int)sensorEvent.values[0]<8000){
+                layout.setBackgroundResource(R.drawable.konoha_noite);
+            }else {
+                layout.setBackgroundResource(R.drawable.konoha);
+            }
+        }
+        if (sensorEvent.sensor.getType() == Sensor.TYPE_AMBIENT_TEMPERATURE) {
+            if((int)sensorEvent.values[0]<=20){
+
+                layout.setBackgroundResource(R.drawable.konoha_frio);
+            }
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int i) {
+
+    }
+
+    public void criacaoSM(){
+        sensorLuz = sm.getDefaultSensor(Sensor.TYPE_LIGHT);
+        sensorTemp = sm.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE);
+    }
+
+    public void verificarSensores(){
+        if(sensorLuz != null){
+            sm.registerListener(this, sensorLuz, SensorManager.SENSOR_DELAY_NORMAL);
+        }else {
+            Toast.makeText(this, "Sensor não está funciona", Toast.LENGTH_SHORT).show();
+        }
+
+        if(sensorTemp != null){
+            sm.registerListener(this, sensorTemp, SensorManager.SENSOR_DELAY_NORMAL);
+        }else {
+            Toast.makeText(this, "Sensor não está funcionando", Toast.LENGTH_SHORT).show();
+        }
     }
 }

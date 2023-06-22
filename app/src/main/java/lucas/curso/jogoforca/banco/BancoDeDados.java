@@ -44,5 +44,5 @@ public class BancoDeDados extends SQLiteOpenHelper {
 
         return palavras;
     }
-
+//versao6
 }

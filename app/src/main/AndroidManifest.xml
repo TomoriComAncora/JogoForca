@@ -2,12 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+
+
 
     <application
         android:allowBackup="true"
@@ -19,22 +21,22 @@
         android:theme="@style/Theme.JogoForca"
         tools:targetApi="31">
         <activity
-            android:name=".AddPalavraActivity5"
+            android:name=".activitys.AddPalavraActivity5"
             android:exported="false" />
         <activity
-            android:name=".PlayerActivity4"
+            android:name=".activitys.PlayerActivity4"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".SobreActivity3"
+            android:name=".activitys.SobreActivity3"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activitys.MainActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".LoginActivity2"
+            android:name=".activitys.LoginActivity2"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -43,6 +45,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service android:name=".utils.musicaGeral" />
     </application>
 
 </manifest>

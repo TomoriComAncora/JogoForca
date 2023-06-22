@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/vale_fim"
-    tools:context=".PlayerActivity4">
+    tools:context=".activitys.PlayerActivity4">
 
     <ImageView
         android:id="@+id/imageSasuke"

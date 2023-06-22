@@ -1,8 +1,9 @@
-package lucas.curso.jogoforca;
+package lucas.curso.jogoforca.activitys;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -11,8 +12,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import lucas.curso.jogoforca.R;
+
 public class PlayerActivity4 extends AppCompatActivity {
 
+    private MediaPlayer mp;
     private ImageView py1, py2, py3, py4;
     private Button btEnviar;
 
@@ -24,6 +28,7 @@ public class PlayerActivity4 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player4);
 
+        mp = MediaPlayer.create(this, R.raw.click);
         py1 = findViewById(R.id.imageNaruto);
         py2 = findViewById(R.id.imageSasuke);
         py3 = findViewById(R.id.imageSakura);
@@ -34,6 +39,7 @@ public class PlayerActivity4 extends AppCompatActivity {
         py1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mp.start();
                 escolherIMG = R.drawable.naruto_1;
             }
         });
@@ -41,6 +47,7 @@ public class PlayerActivity4 extends AppCompatActivity {
         py2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mp.start();
                 escolherIMG = R.drawable.sasuke_1;
             }
         });
@@ -48,6 +55,7 @@ public class PlayerActivity4 extends AppCompatActivity {
         py3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mp.start();
                 escolherIMG = R.drawable.sakura;
             }
         });
@@ -55,6 +63,7 @@ public class PlayerActivity4 extends AppCompatActivity {
         py4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mp.start();
                 escolherIMG = R.drawable.kakashi;
             }
         });
@@ -62,6 +71,7 @@ public class PlayerActivity4 extends AppCompatActivity {
         btEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mp.start();
                 String nome = editText.getText().toString();
                 if(escolherIMG != 0 && !TextUtils.isEmpty(nome)){
                     Intent in = new Intent(PlayerActivity4.this, MainActivity.class);

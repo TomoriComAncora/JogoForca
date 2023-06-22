@@ -5,7 +5,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/academia_konoha"
-    tools:context=".LoginActivity2">
+    tools:context=".activitys.LoginActivity2">
+
+    <Button
+        android:id="@+id/bt_playmuica"
+        android:layout_width="55dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/laranja"
+        app:icon="@drawable/ic_play"
+        app:iconGravity="start"
+        app:iconPadding="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/bt_stop"
+        android:layout_width="55dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:backgroundTint="@color/laranja"
+        app:icon="@drawable/ic_stop"
+        app:iconGravity="start"
+        app:iconPadding="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline" />
 
     <Button
         android:id="@+id/bt_jogar"
@@ -41,7 +66,7 @@
         android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/laranja"
-        android:text="SOBRE"
+        android:text="PALAVRAS SALVAS"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -64,5 +89,12 @@
         app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/jogoda_forca_naruto" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
