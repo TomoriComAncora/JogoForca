@@ -32,14 +32,14 @@ public class BancoDeDados extends SQLiteOpenHelper {
     }
 
     public List<String> listPalavras() {
-        String query = "SELECT 'palavra' FROM palavras;";
+        String query = "SELECT * FROM palavras;";
         List<String> palavras = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.rawQuery(query, null);
         while (cursor.moveToNext()) {
-            palavras.add(cursor.getString(0));
+            palavras.add(cursor.getString(1));
         }
 
         return palavras;

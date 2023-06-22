@@ -3,6 +3,7 @@ package lucas.curso.jogoforca;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -27,7 +28,7 @@ public class AddPalavraActivity5 extends AppCompatActivity {
                 Toast.makeText(this, "Digite uma palavra", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "Palavra salva", Toast.LENGTH_SHORT).show();
-                MainActivity.getBancoDeDados().inserirPalavra(palavra);
+                LoginActivity2.getBancoDeDados().inserirPalavra(palavra);
                 finish();
             }
         });

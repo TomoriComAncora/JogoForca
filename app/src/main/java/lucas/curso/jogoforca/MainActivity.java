@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,7 +25,7 @@ import java.util.Random;
 import lucas.curso.jogoforca.banco.BancoDeDados;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private static BancoDeDados bancoDeDados;
+
     private List<String> palavras;
     private String palavraSecreta;
     private StringBuilder palavraAdivinhada;
@@ -48,8 +49,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        bancoDeDados = new BancoDeDados(this);
-
         inicializando();
         verificarLetras();
         recuperarAvatar();
@@ -57,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void carregarPalavras() {
-        palavras = bancoDeDados.listPalavras();
+        palavras = LoginActivity2.getBancoDeDados().listPalavras();
     }
 
     public void verificarLetras(){
@@ -261,8 +260,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void inicalizarJogo() {
         Random random = new Random();
+        this.palavras = LoginActivity2.getBancoDeDados().listPalavras();
+
+        if (palavras.size() == 0) {
+            Toast.makeText(MainActivity.this, "Não há palavras cadastradas", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        Log.d("palavras", palavras.toString());
         int index = random.nextInt(palavras.size());
         palavraSecreta = palavras.get(index);
+        Log.d("palavraSecreta", palavraSecreta);
         palavraAdivinhada = new StringBuilder();
         tentativasRestantes = 6;
 
@@ -359,7 +367,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         imageAvatar.setImageResource(imagem);
     }
 
-    public static BancoDeDados getBancoDeDados() {
-        return bancoDeDados;
-    }
+
 }
