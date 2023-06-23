@@ -440,7 +440,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onSensorChanged(SensorEvent sensorEvent) {
         ConstraintLayout layout = findViewById(R.id.telaPrincipal);
         if(sensorEvent.sensor.getType() == Sensor.TYPE_LIGHT){
-            if((int)sensorEvent.values[0]<8000){
+            if((int)sensorEvent.values[0]<16000){
                 layout.setBackgroundResource(R.drawable.konoha_noite);
             }else {
                 layout.setBackgroundResource(R.drawable.konoha);
@@ -470,13 +470,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(sensorLuz != null){
             sm.registerListener(this, sensorLuz, SensorManager.SENSOR_DELAY_NORMAL);
         }else {
-            Toast.makeText(this, "Sensor não está funciona", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Sensor não está funciona de luminosidade", Toast.LENGTH_SHORT).show();
         }
 
         if(sensorTemp != null){
             sm.registerListener(this, sensorTemp, SensorManager.SENSOR_DELAY_NORMAL);
         }else {
-            Toast.makeText(this, "Sensor não está funcionando", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Sensor não está funcionando de temperatura", Toast.LENGTH_SHORT).show();
         }
 
     }
