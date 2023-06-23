@@ -75,6 +75,7 @@
         android:hint="@string/seuNome"
         android:inputType="text"
         android:textAlignment="center"
+        android:textColor="@color/black"
         android:textColorHint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
